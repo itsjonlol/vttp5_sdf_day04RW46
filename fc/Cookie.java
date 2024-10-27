@@ -22,7 +22,7 @@ public class Cookie {
         cookiesList = new ArrayList<>();
         try {
             Reader reader = new FileReader(fileName);
-            BufferedReader br = new BufferedReader(reader);
+            BufferedReader br = new BufferedReader(reader); //i followed kenneth's way
             String line;
             while ((line = br.readLine()) != null) {
                 cookiesList.add(line);

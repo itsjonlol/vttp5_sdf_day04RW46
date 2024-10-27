@@ -3,6 +3,7 @@ package fc;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -12,15 +13,32 @@ import java.util.List;
 
 public class Server {
     public static void main(String[] args)  {
-        if (args.length<2){
+        if (args.length<3){
             System.err.println("Ensure argument format is <port> <filename.txt>");
         }
         int port = Integer.parseInt(args[0]);
-        String fileName = args[1];
+        String fileName = args[1]; // kenneth use as string 
+        String dirPath = args[2]; // normally i will put behind filename, but its testing
+        String fileDir = System.getProperty("user.dir");
+        System.out.println("hello! + " + fileDir);
+        File newDirectory = new File(dirPath); //darryl method
+        //File newDirectory = new File(fileDir + File.separator + dirPath); // new code added to create the directory
+        if (!newDirectory.exists()) {
+            newDirectory.mkdir();
+        } else {
+            System.out.println(newDirectory.getName() + " already exists!");
+        }
 
+        
+        
+        
         Cookie cookie = new Cookie();
 
-        List<String> generatedList = cookie.generateCookieList(fileName);
+        // List<String> generatedList = cookie.generateCookieList(fileName);// kenneth method
+
+        List<String> generatedList = cookie.generateCookieList(dirPath + File.separator+fileName); //Darryl method
+        //List<String> generatedList = cookie.generateCookieList(newDirectory.toString() + File.separator + fileName); //zc method
+        
         
 
         //create the server
